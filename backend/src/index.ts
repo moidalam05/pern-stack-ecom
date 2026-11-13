@@ -8,6 +8,7 @@ import path from "node:path";
 import { clerkMiddleware } from "@clerk/express";
 import { clerkWebhookHandler } from "./webhooks/clerk.js";
 import { getEnv } from "./lib/env.js";
+import keepAliveCronJob from "./lib/cron.js";
 
 const env = getEnv();
 const app = express();
@@ -26,6 +27,13 @@ app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 
 app.use(clerkMiddleware());
+
+app.get("/health", (_req, res) => {
+  return res.status(200).json({
+    success: true,
+    ok: true,
+  });
+});
 
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
@@ -47,4 +55,7 @@ const PORT = env.PORT;
 
 app.listen(PORT || 3000, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT || 3000}`);
+  if (env.NODE_ENV === "production") {
+    keepAliveCronJob.start();
+  }
 });
