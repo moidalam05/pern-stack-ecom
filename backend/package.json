@@ -31,12 +31,8 @@
     "express": "^5.3.0",
     "pg": "^8.23.1",
     "standardwebhooks": "^1.1.1",
-    "stream-chat": "^10.0.1",
+    "stream-chat": "^9.55.0",
     "zod": "^4.6.7"
-  },
-  "allowScripts": {
-    "stream-chat@10.0.1": true,
-    "@sentry/node-cpu-profiler": false
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

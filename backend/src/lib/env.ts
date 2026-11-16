@@ -22,7 +22,8 @@ export const envSchema = z.object({
   SENTRY_DSN: z.string(),
 
   STREAM_API_KEY: z.string().min(1),
-  STREAM_API_SECRET_KEY: z.string().min(1),
+  STREAM_API_SECRET: z.string().min(1),
+
 
   IMAGEKIT_ID: z.string().min(1),
   IMAGEKIT_URL: z.string(),
